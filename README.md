@@ -41,4 +41,4 @@ Note: the payload is inserted into a PHP template. There is no need to include P
 Good luck!
 
 ## Similar Projects
-* https://github.com/wetw0rk/malicious-wordpress-plugin/blob/master/wordpwn.py (a nifty tool that automates meterpreter use)
+* https://github.com/wetw0rk/malicious-wordpress-plugin/blob/master/wordpwn.py (a nifty tool that automates meterpreter use but with less payload flexibility)

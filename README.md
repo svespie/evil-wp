@@ -25,6 +25,7 @@ $ python evil-wp.py -n <plugin_name> -p "<payload>"
 
 * the plugin name should be unique to the installation being attacked
 * the payload can be any valid PHP code
+* once installed and enabled, navigate to the plugin file to trigger the payload (/wp-content/plugins/<plugin_name>/<script_name>.php)
 
 
 ## Example Payload Generation

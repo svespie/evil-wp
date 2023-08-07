@@ -1,1 +1,1 @@
-random_name_generator
+python-random-name-generator
